@@ -31,37 +31,45 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 });
 
-const numberInputs = document.querySelectorAll('input[type="number"]');
-numberInputs.forEach(function (input) {
-	input.addEventListener("wheel", function (e) {
-		if (document.activeElement !== input) return;
+const enhanceNumberInputs = () => {
+	const numberInputs = document.querySelectorAll('input[type="number"]');
 
+	numberInputs.forEach((input) => {
+		input.addEventListener("wheel", handleWheelEvent, { passive: false });
+	});
+
+	function handleWheelEvent(event) {
+		if (document.activeElement !== this) return;
+		event.preventDefault();
+
+		const input = this;
+		const currentValue = parseFloat(input.value) || 0;
+		const isScrollUp = event.deltaY < 0;
 		let newValue;
+
 		if (input.id === "capital") {
-			const value = parseFloat(input.value) || 0;
-			if (e.deltaY < 0) {
-				newValue = value + 100;
-			} else {
-				newValue = value - 100;
-			}
-			if (newValue < 0) newValue = 0;
-			input.value = newValue;
-			input.dispatchEvent(new Event("change"));
-			input.dispatchEvent(new Event("input"));
-			e.preventDefault();
+			const incrementAmount = 100;
+			newValue = isScrollUp
+				? currentValue + incrementAmount
+				: Math.max(0, currentValue - incrementAmount);
+
+			updateInputValue(input, newValue, false);
 		} else {
 			const step = parseFloat(input.step) || 1;
-			const value = parseFloat(input.value) || 0;
-			if (e.deltaY < 0) {
-				newValue = value + step;
-			} else {
-				newValue = value - step;
-			}
-			if (newValue < 0) newValue = 0;
-			input.value = newValue;
-			input.dispatchEvent(new Event("change"));
-			input.dispatchEvent(new Event("input"));
-			e.preventDefault();
+			newValue = isScrollUp ? currentValue + step : currentValue - step;
+			newValue = Math.max(0, newValue);
+
+			updateInputValue(input, newValue, true);
 		}
-	});
-});
+	}
+
+	function updateInputValue(input, value, triggerChangeEvent) {
+		input.value = value;
+		input.dispatchEvent(new Event("input"));
+		if (triggerChangeEvent) {
+			input.dispatchEvent(new Event("change"));
+		}
+	}
+};
+
+enhanceNumberInputs();
