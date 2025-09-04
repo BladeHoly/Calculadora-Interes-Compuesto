@@ -1,0 +1,121 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background: linear-gradient(45deg, #1a1a1a 0%, #141415 50%, #080b08 100%);
+	color: #ffffff;
+	font-family: "Arial", sans-serif;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+/* Firefox */
+input[type="number"] {
+	-moz-appearance: textfield;
+	appearance: textfield;
+	margin: 0;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	padding: 2rem;
+}
+
+.container h1 {
+	margin-bottom: 2rem;
+	font-size: 2.5rem;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.container form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1.5rem;
+	width: 100%;
+	max-width: 400px;
+}
+
+.container form label {
+	font-size: 1.2rem;
+	color: #ffffff;
+	font-weight: 600;
+	letter-spacing: 0.5px;
+}
+
+.container form input {
+	width: 100%;
+	padding: 0.8rem 1.2rem;
+	font-size: 1.1rem;
+	color: #ffffff;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 4px;
+	transition: all 0.3s ease;
+}
+
+.container form input:focus {
+	outline: none;
+	border-color: rgba(255, 255, 255, 0.5);
+	background: rgba(255, 255, 255, 0.15);
+	box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.container form select {
+	width: 100%;
+	padding: 0.8rem 1.2rem;
+	font-size: 1.1rem;
+	color: #ffffff;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 4px;
+	transition: all 0.3s ease;
+}
+
+.container form select:focus {
+	outline: none;
+	border-color: rgba(255, 255, 255, 0.5);
+	background: rgba(255, 255, 255, 0.15);
+	box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.container form select option {
+	background-color: #1a1a1a;
+}
+
+.container form button {
+	width: 100%;
+	padding: 0.8rem 1.2rem;
+	font-size: 1.1rem;
+	color: #ffffff;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 4px;
+	transition: all 0.3s ease;
+}
+
+.container form button:hover {
+	background: rgba(255, 255, 255, 0.2);
+	border-color: rgba(255, 255, 255, 0.5);
+	box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+#resultado {
+	margin-top: 2rem;
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: #ffffff;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
