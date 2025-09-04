@@ -36,19 +36,32 @@ numberInputs.forEach(function (input) {
 	input.addEventListener("wheel", function (e) {
 		if (document.activeElement !== input) return;
 
-		const step = parseFloat(input.step) || 1;
-		const value = parseFloat(input.value) || 0;
 		let newValue;
-
-		if (e.deltaY < 0) {
-			newValue = value + step;
+		if (input.id === "capital") {
+			const value = parseFloat(input.value) || 0;
+			if (e.deltaY < 0) {
+				newValue = value + 100;
+			} else {
+				newValue = value - 100;
+			}
+			if (newValue < 0) newValue = 0;
+			input.value = newValue;
+			input.dispatchEvent(new Event("change"));
+			input.dispatchEvent(new Event("input"));
+			e.preventDefault();
 		} else {
-			newValue = value - step;
+			const step = parseFloat(input.step) || 1;
+			const value = parseFloat(input.value) || 0;
+			if (e.deltaY < 0) {
+				newValue = value + step;
+			} else {
+				newValue = value - step;
+			}
+			if (newValue < 0) newValue = 0;
+			input.value = newValue;
+			input.dispatchEvent(new Event("change"));
+			input.dispatchEvent(new Event("input"));
+			e.preventDefault();
 		}
-		if (newValue < 0) newValue = 0;
-		input.value = newValue;
-		input.dispatchEvent(new Event("change"));
-		input.dispatchEvent(new Event("input"));
-		e.preventDefault();
 	});
 });
